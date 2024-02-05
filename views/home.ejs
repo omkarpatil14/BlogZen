@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <%- include('./partials/head') %>
+  <title>Homepage</title>
+  <style>
+    body {
+      background-color: #111;
+      color: #eee;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      border: none; /* Remove border from the body */
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      margin-top: 20px;
+      padding: 0 20px;
+    }
+
+    h1 {
+      color: #fff;
+    }
+
+    .card {
+      background-color: #222;
+      color: #eee;
+      border-radius: 10px;
+      border: none;
+      margin-bottom: 20px;
+    }
+
+    .card-title {
+      color: #fff;
+    }
+
+    .card img {
+      border-radius: 10px 10px 0 0;
+    }
+
+    .btn-primary,
+    .btn-delete {
+      background-color: #007bff;
+      border-color: #007bff;
+      margin-top: 10px;
+    }
+
+    .btn-delete {
+      margin-left: 10px;
+    }
+
+    @media only screen and (max-width: 768px) {
+      .container {
+        padding: 0 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <%- include('./partials/nav') %>
+
+  <div class="container mt-3">
+    <h1>Latest Blogs</h1>
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4">
+      <% blogs.forEach(blog => { %>
+      <div class="col mb-4">
+        <div class="card">
+          <img src="<%= blog.coverImageURL %>" class="card-img-top" alt="Blog Cover Image" />
+          <div class="card-body">
+            <h5 class="card-title"><%= blog.title %></h5>
+            <div>
+              <a href="/blog/<%= blog._id %>" class="btn btn-primary">View</a>
+               
+              
+              
+              <% if (locals.role) { %>
+                <form action="/blog/delete/<%= blog._id%>" method="post" style="display: inline;">
+                  <button class="btn btn-delete" type="submit" >Delete</button>
+                </form>
+              <% } %>
+               
+             
+            </div>
+          </div>
+        </div>
+      </div>
+      <% }) %>
+    </div>
+  </div>
+
+  <%- include('./partials/scripts') %>
+</body>
+</html>

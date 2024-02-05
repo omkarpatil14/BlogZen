@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <%- include('./partials/head') %>
+  <title>Add New Blog</title>
+  <style>
+    body {
+      background-color: #111;
+      color: #eee;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      border: none; /* Remove border from the body */
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      margin-top: 20px;
+      padding: 0 20px;
+    }
+
+    .form-label {
+      color: #fff;
+    }
+
+    .form-control {
+      background-color: #222;
+      color: #eee;
+      border: none;
+    }
+
+    .btn-primary {
+      background-color: #007bff;
+      border-color: #007bff;
+    }
+
+    @media only screen and (max-width: 768px) {
+      .container {
+        padding: 0 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <%- include('./partials/nav') %>
+
+  <div class="container mt-3">
+    <form action="/blog" method="post" enctype="multipart/form-data">
+      <div class="mb-3">
+        <label for="coverImage" class="form-label">Cover Image</label>
+        <input
+          type="file"
+          class="form-control"
+          id="coverImage"
+          name="coverImage"
+          aria-describedby="coverImage"
+        />
+      </div>
+      <div class="mb-3">
+        <label for="title" class="form-label">Title</label>
+        <input
+          type="text"
+          class="form-control"
+          id="title"
+          name="title"
+          aria-describedby="title"
+        />
+      </div>
+      <div class="mb-3">
+        <label for="body">Body</label>
+        <textarea name="body" class="form-control" id="body"></textarea>
+      </div>
+      <div class="mb-3">
+        <button class="btn btn-primary">Submit</button>
+      </div>
+    </form>
+  </div>
+
+  <%- include('./partials/scripts') %>
+</body>
+</html>
