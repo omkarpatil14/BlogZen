@@ -4,6 +4,7 @@ const path = require("path");
 const express = require("express");
 const mongoose = require("mongoose");
 const cookiePaser = require("cookie-parser");
+const bodyParser = require('body-parser')
 
 const Blog = require("./models/blog");
 
@@ -15,17 +16,20 @@ const {
 } = require("./middlewares/authentication");
 
 const app = express();
+
 const PORT = process.env.PORT || 8000;
 
 mongoose
   .connect(process.env.MONGO_URL )
-  .then((e) => console.log("MongoDB Connected"));
+  .then((e) => console.log("MongoDB Connected"))
+  .catch(()=> console.log(`Mongo error ${process.env.MONGO_URL}`)
+);   
 
 app.set("view engine", "ejs");
 app.set("views", path.resolve("./views"));
-
+ 
 app.use(express.urlencoded({ extended: false }));
-app.use(cookiePaser());
+app.use(cookiePaser()); 
 app.use(checkForAuthenticationCookie("token"));
 app.use(express.static(path.resolve("./public")));
 
